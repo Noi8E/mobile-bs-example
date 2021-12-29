@@ -2,10 +2,10 @@ package helpers;
 
 import static io.restassured.RestAssured.given;
 
-public class Browserstack {
+public class Browserstack extends ConfigSettings {
     public static String videoUrl(String sessionId) {
         return given()
-                .auth().basic("qaguru3", "PDQAwqS6GqzeNLqsj92r")
+                .auth().basic(browserstackConfig.getUser(), browserstackConfig.getKey())
                 .when()
                 .get("https://api-cloud.browserstack.com/app-automate/sessions/" + sessionId +".json")
                 .then()

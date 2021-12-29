@@ -3,6 +3,7 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import drivers.BrowserstackMobileDriver;
 import helpers.Attach;
+import helpers.ConfigSettings;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -11,10 +12,9 @@ import org.junit.jupiter.api.BeforeEach;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
-import static io.restassured.RestAssured.sessionId;
-import static org.openqa.selenium.remote.HttpSessionId.getSessionId;
+import static helpers.Attach.getSessionId;
 
-public class TestBase {
+public class TestBase extends ConfigSettings {
     @BeforeAll
     public static void setup() {
         addListener("AllureSelenide", new AllureSelenide());
@@ -23,7 +23,9 @@ public class TestBase {
         Configuration.startMaximized = false;
         Configuration.browserSize = null;
         Configuration.timeout = 10000;
+        ConfigSettings.setConfig();
     }
+
 
     @BeforeEach
     public void startDriver() {
@@ -32,7 +34,7 @@ public class TestBase {
 
     @AfterEach
     public void afterEach() {
-        //String sessionId = getSessionId()
+        String sessionId = getSessionId();
 
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();

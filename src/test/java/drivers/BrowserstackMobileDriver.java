@@ -1,6 +1,7 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
+import helpers.ConfigSettings;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -8,7 +9,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class BrowserstackMobileDriver implements WebDriverProvider {
+public class BrowserstackMobileDriver extends ConfigSettings implements WebDriverProvider {
 
 
     public static URL getBrowserstackUrl() {
